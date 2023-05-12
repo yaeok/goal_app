@@ -40,10 +40,10 @@ class GoalRepository {
   Future updateGoals(String docId, Goal goal) async {
     final data = {
       'goals': {
-        'firstGoals': goal.goals[1],
-        'secondGoals': goal.goals[2],
-        'thirdGoals': goal.goals[3],
-        'finishGoals': goal.goals[0],
+        'firstGoals': [goal.goals[1].title, goal.goals[1].flg],
+        'secondGoals': [goal.goals[2].title, goal.goals[2].flg],
+        'thirdGoals': [goal.goals[3].title, goal.goals[3].flg],
+        'finishGoals': [goal.goals[0].title, goal.goals[0].flg],
       }
     };
     final CollectionReference goalsCollection =

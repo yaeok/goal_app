@@ -1,17 +1,36 @@
 import 'package:fill/firebase/apis/goal.dart';
-import 'package:fill/model/goal/goal.dart';
 import 'package:fill/state/goal_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DetailPage extends ConsumerWidget {
-  final Goal goal;
-  const DetailPage(this.goal, {Key? key}) : super(key: key);
+  const DetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final goalState = ref.watch(goalProvider);
-    List<String> text = ['最終目標', '第1目標', '第2目標', '第3目標'];
+    final goal = ref.watch(goalProvider);
+    final goalList = [
+      {
+        'text': '最終目標',
+        'title': goal?.goals[0].title,
+        'flg': goal?.goals[0].flg,
+      },
+      {
+        'text': '第1目標',
+        'title': goal?.goals[1].title,
+        'flg': goal?.goals[1].flg,
+      },
+      {
+        'text': '第2目標',
+        'title': goal?.goals[2].title,
+        'flg': goal?.goals[2].flg,
+      },
+      {
+        'text': '第3目標',
+        'title': goal?.goals[3].title,
+        'flg': goal?.goals[3].flg,
+      },
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
@@ -19,9 +38,9 @@ class DetailPage extends ConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: ListView.builder(
-          itemCount: goal.goals.length,
+          itemCount: goalList.length,
           itemBuilder: (context, index) {
-            return goal.goals[index].flg != false
+            return goalList[index]['flg'] != false
                 ? Dismissible(
                     key: Key(index.toString()),
                     direction: DismissDirection.endToStart,
@@ -49,7 +68,14 @@ class DetailPage extends ConsumerWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: TextButton(
-                                      onPressed: () async {},
+                                      onPressed: () async {
+                                        final updateGoal = ref
+                                            .read(goalProvider.notifier)
+                                            .updateItemFlg(index, false);
+                                        GoalRepository().updateGoals(
+                                            goal.id.toString(), updateGoal);
+                                        Navigator.pop(context);
+                                      },
                                       child: const Text('達成')),
                                 )
                               ],
@@ -62,10 +88,10 @@ class DetailPage extends ConsumerWidget {
                       margin: const EdgeInsetsDirectional.all(15),
                       child: InputDecorator(
                           decoration: InputDecoration(
-                            labelText: text[index],
+                            labelText: goalList[index]['text'].toString(),
                             border: const OutlineInputBorder(),
                           ),
-                          child: Text(goal.goals[index].title.toString())),
+                          child: Text(goalList[index]['title'].toString())),
                     ),
                   )
                 : Container();
