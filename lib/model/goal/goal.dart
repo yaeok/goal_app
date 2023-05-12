@@ -21,7 +21,7 @@ class Goal {
 
   factory Goal.fromFirestore(DocumentSnapshot snap) {
     final data = snap.data()! as Map;
-    final String id = data['docId'] ?? '';
+    final String id = snap.id;
     final Map<String, dynamic> itemData = data['goals'] ?? {};
     final Item firstGoal = Item(
       title: itemData['firstGoals'][0] ?? '',
@@ -43,6 +43,13 @@ class Goal {
     return Goal(
       id: id,
       goals: goals,
+    );
+  }
+
+  Goal copyWith({String? id, List<Item>? goals}) {
+    return Goal(
+      id: id ?? this.id,
+      goals: goals ?? this.goals,
     );
   }
 }

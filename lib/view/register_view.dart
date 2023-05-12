@@ -66,16 +66,15 @@ class RegisterPage extends ConsumerWidget {
                         thirdController.text == '' &&
                         finishController.text == '') {
                       await showDialog(
-                        barrierDismissible: false,
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
+                          return SimpleDialog(
                             title: const Text(
                               '入力されていない項目があります',
                               style: TextStyle(fontSize: 15),
                               textAlign: TextAlign.center,
                             ),
-                            actions: [
+                            children: [
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 15),
@@ -87,13 +86,14 @@ class RegisterPage extends ConsumerWidget {
                           );
                         },
                       );
+                    } else {
+                      await GoalRepository().registerGoal(
+                          firstController.text,
+                          secondController.text,
+                          thirdController.text,
+                          finishController.text);
+                      Navigator.pop(context);
                     }
-                    await GoalRepository().registerGoal(
-                        firstController.text,
-                        secondController.text,
-                        thirdController.text,
-                        finishController.text);
-                    Navigator.pop(context);
                   },
                   child: const Text('登録する'),
                 ),
