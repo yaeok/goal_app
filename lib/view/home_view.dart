@@ -1,4 +1,3 @@
-import 'package:fill/model/goal/goal.dart';
 import 'package:fill/state/goal_state.dart';
 import 'package:fill/view/auth/login_page.dart';
 import 'package:fill/view/detail_view.dart';
