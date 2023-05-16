@@ -12,23 +12,23 @@ class DetailPage extends ConsumerWidget {
     final goalList = [
       {
         'text': '最終目標',
-        'title': goal?.goals[0].title,
-        'flg': goal?.goals[0].flg,
+        'title': goal.goals[0].title,
+        'flg': goal.goals[0].flg,
       },
       {
         'text': '第1目標',
-        'title': goal?.goals[1].title,
-        'flg': goal?.goals[1].flg,
+        'title': goal.goals[1].title,
+        'flg': goal.goals[1].flg,
       },
       {
         'text': '第2目標',
-        'title': goal?.goals[2].title,
-        'flg': goal?.goals[2].flg,
+        'title': goal.goals[2].title,
+        'flg': goal.goals[2].flg,
       },
       {
         'text': '第3目標',
-        'title': goal?.goals[3].title,
-        'flg': goal?.goals[3].flg,
+        'title': goal.goals[3].title,
+        'flg': goal.goals[3].flg,
       },
     ];
     return Scaffold(

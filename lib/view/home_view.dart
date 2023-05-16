@@ -1,4 +1,3 @@
-import 'package:fill/model/goal/goal.dart';
 import 'package:fill/state/goal_state.dart';
 import 'package:fill/view/auth/login_page.dart';
 import 'package:fill/view/detail_view.dart';
@@ -70,7 +69,7 @@ class HomePage extends ConsumerWidget {
       ),
       drawer: Drawer(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ListView(children: <Widget>[
             SwitchListTile(
               title: const Text('過去の栄光'),
