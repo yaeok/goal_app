@@ -21,11 +21,19 @@ dependencies:
   cloud_firestore: ^4.5.3
   firebase_auth: ^4.4.2
   google_sign_in: ^6.1.0
+  flutter_launcher_icons: ^0.9.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: 'asset/images/Goals.png'
+  adaptive_icon_background: '#ffffff'
+  adaptive_icon_foreground: 'asset/images/Goals_50.png'
 flutter:
   uses-material-design: true

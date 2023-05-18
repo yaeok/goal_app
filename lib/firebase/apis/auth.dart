@@ -41,6 +41,10 @@ class AuthRepository {
     return userCredential;
   }
 
+  // Future<UserCredential> signInWithApple() async {
+  //   final
+  // }
+
   Future<void> storeUserData(UserCredential userCredential) async {
     final user = userCredential.user;
     final userData = {

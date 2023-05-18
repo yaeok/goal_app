@@ -46,6 +46,26 @@ ThemeData myTheme() => ThemeData(
           ),
         ),
       ),
+      // ボタン設定
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+            color: AppColors.pink, //枠線の色
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 80,
+            vertical: 15,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'NotoSerif',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.pink,
