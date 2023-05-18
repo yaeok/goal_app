@@ -52,37 +52,35 @@ class DetailPage extends ConsumerWidget {
                         child: Icon(Icons.delete),
                       ),
                     ),
-                    onDismissed: (direction) async {
-                      if (direction == DismissDirection.endToStart) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SimpleDialog(
-                              title: const Text(
-                                '更新後、取り消しができません。\n本当によろしいですか？',
-                                style: TextStyle(fontSize: 15),
-                                textAlign: TextAlign.center,
+                    confirmDismiss: (direction) async {
+                      return await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('確認'),
+                            content: const Text('本当に削除しますか？'),
+                            actions: [
+                              SimpleDialogOption(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                                child: const Text('はい'),
                               ),
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: TextButton(
-                                      onPressed: () async {
-                                        final updateGoal = ref
-                                            .read(goalProvider.notifier)
-                                            .updateItemFlg(index, false);
-                                        GoalRepository().updateGoals(
-                                            goal.id.toString(), updateGoal);
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('達成')),
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      }
+                              SimpleDialogOption(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                                child: const Text('いいえ'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    onDismissed: (direction) async {
+                      final updateGoal = ref
+                          .read(goalProvider.notifier)
+                          .updateItemFlg(index, false);
+                      GoalRepository()
+                          .updateGoals(goal.id.toString(), updateGoal);
                     },
                     child: Container(
                       margin: const EdgeInsetsDirectional.all(15),

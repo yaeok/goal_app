@@ -29,6 +29,9 @@ class HomePage extends ConsumerWidget {
                   itemCount: dataList.length,
                   itemBuilder: (context, index) {
                     return Card(
+                      color: dataList[index].goals[0].flg == true
+                          ? null
+                          : Colors.grey,
                       child: Padding(
                         padding: const EdgeInsets.all(5),
                         child: ListTile(
@@ -38,11 +41,13 @@ class HomePage extends ConsumerWidget {
                           onTap: () {
                             ref.read(goalProvider.notifier).state =
                                 dataList[index];
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DetailPage()),
-                            );
+                            if (dataList[index].goals[0].flg == true) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const DetailPage()),
+                              );
+                            }
                           },
                         ),
                       ),
@@ -58,7 +63,10 @@ class HomePage extends ConsumerWidget {
         width: 75,
         height: 75,
         child: FloatingActionButton(
-          child: const Icon(Icons.add),
+          child: const Icon(
+            Icons.add,
+            size: 30,
+          ),
           onPressed: () => {
             Navigator.push(
               context,
@@ -99,10 +107,11 @@ class HomePage extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TextButton(
                             child: const Text('ログアウト'),
-                            onPressed: () async {
-                              await FirebaseAuth.instance.signOut();
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) {
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) {
                                   return const LoginPage();
                                 }),
                               );

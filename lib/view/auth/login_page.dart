@@ -40,6 +40,18 @@ class LoginPage extends ConsumerWidget {
               },
               child: const Text('Sign in with Google'),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            OutlinedButton(
+              onPressed: () async {
+                await AuthRepository().signInWithGoogle();
+                // Home画面を表示する
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              },
+              child: const Text('Sign in with Apple'),
+            ),
           ],
         ),
       ),
